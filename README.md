@@ -127,11 +127,12 @@ def Bmi_Calculator(request):
 
 
 ## SERVER SIDE PROCESSING:
-![alt text](<dharsheyy/Screenshot (42).png>)
+![WhatsApp Image 2025-10-06 at 20 30 35_5f0000f8](https://github.com/user-attachments/assets/70bdf41b-cb59-4716-9e5a-2ff954360da6)
 
 ## HOMEPAGE:
 
-![alt text](<Screenshot (41).png>)
+![WhatsApp Image 2025-10-06 at 20 30 18_ae559764](https://github.com/user-attachments/assets/2c7be12d-29cb-4b24-93a7-0c71f2fdd8f2)
+
 
 
 ## RESULT:
