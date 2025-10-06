@@ -33,93 +33,106 @@ Publish the website in the given URL.
 
 ## PROGRAM :
 ```
+math.html
 <html>
-<head>
-    <title>BMI Calculator</title>
-    <style>
-        
-h1{
+    <head>
+        <title>BMI Calculator</title>
+    <style> 
+           h1{
     border: 2px solid ;
     padding: 15px;
     margin: 40px;
+    text-align: center;
     border-radius: 10px;
     position: center;
     top: 200px;
     right: 1100px;
     font-size: xx-large;
     font-weight: bolder;
-    font-variant: small-caps;
-    font-family: Georgia;
 }
 form{
     border: 5px  solid rgb(13, 13, 13);
     background-color: rgb(45, 123, 158) ;
     padding: 30px;
-    margin: 10px;
-    border-radius: 20px;
+    margin: 100px;
+    border-radius: 30px;
     width: 425px;
     position:center;
-    top: 300px;
-    left: 527px;
+}
+
+
+.footer {
+    border-top: 1px solid #070707;
+    padding-top: 20px;
     
 }
 
     </style>
-</head>
-<body bgcolor="pink">
-    <center>
+    </head>
+    <body bgcolor="pink">
         <h1>BMI CALCULATOR</h1>
         <form method="POST">
-            {% csrf_token %}
-            <label>HEIGHT (in meter):</label><br>
-            <input type="text" name="height"><br>
-            <label>WEIGHT (in kg):</label><br>
-            <input type="text" name="weight"><br>
-            <button type="submit">CALCULATE</button>
+            {%csrf_token%}
+            <label>HEIGHT</label>
+            <input type="text" name="height" value="{{h}}" ></input>(in cm)<br/>
+            <label>WEIGHT</label>
+            <input type="text" name="weight" value="{{w}}"></input>(in kg)<br/>
+            <button type="submit">Calculate BMI</button>
+              <h2>Your BMI:{{BMI}}</h2>
+
         </form>
-
         
+<footer class="footer">
+                <p>&copy; 2025 Dharshini (25008655)</p>
+            </footer>
+    </body>
 
-        {% if BMI %}
-            <h2>YOUR BMI IS: {{ BMI }}</h2>
-        {% endif %}
-    </center>
-</body>
 </html>
 
 urls.py
 
-from django.contrib import admin
-from django.urls import path
-from myapp import views
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.calculate_bmi, name='calculate_bmi'),
+from django.contrib import admin 
+from django.urls import path 
+from myapp import views 
+urlpatterns = [ 
+    path('admin/', admin.site.urls), 
+    path('Bmi_Calculator/',views.Bmi_Calculator,name="Bmi_Calculator"),
+    path('',views.Bmi_Calculator,name="Bmi_Calculator")
 ]
+
 views.py
-from django.shortcuts import render
 
-def calculate_bmi(request):
-    bmi = None  
-    if request.method == "POST":
-        height = float(request.POST.get("height"))
-        weight = float(request.POST.get("weight"))
-        bmi = weight / (height * 2)
-        print("Height:", height)
-        print("Weight:", weight)
-        print("BMI calculated:", bmi)
+from django.shortcuts import render 
+def Bmi_Calculator(request): 
+    context={} 
+    context['BMI'] = "0" 
+    context['h'] = "0" 
+    context['w'] = "0" 
+    if request.method == 'POST': 
+        print("POST method is used")
+        h = request.POST.get('height','0')
+        w = request.POST.get('weight','0')
+        print('request=',request) 
+        print('Height=',h)
+        print('Weight=',w) 
+        BMI = int(w) /int(h)*2
+        context['BMI'] = BMI
+        context['h'] = h
+        context['w'] = w 
+        print('BMI=',BMI) 
+    return render(request,'myapp/math.html',context)
 
-    return render(request, "myapp/math.html", {"BMI": bmi})
 
 ```
 
 
 ## SERVER SIDE PROCESSING:
+![alt text](<dharsheyy/Screenshot (42).png>)
 
-![alt text](<Screenshot (35)-1.png>)
 ## HOMEPAGE:
 
-![alt text](<Screenshot (34)-1.png>)
+![alt text](<Screenshot (41).png>)
+
 
 ## RESULT:
 The program for performing server side processing is completed successfully.
